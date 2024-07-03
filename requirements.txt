@@ -1,4 +1,5 @@
-datetime
-pandas 
-pyodbc
 selenium
+requests
+datetime
+pandas
+pyodbc
