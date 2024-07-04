@@ -150,38 +150,3 @@ datos = datos.fillna('null')
 print(datos)
 
 
-
-
-
-#datos.to_excel(r'C:\Users\User\Downloads\REMATES\nombre_del_archivo.xlsx', index=False)
-
-
-
-
-
-
-# Establecer conexion con sql
-conexion = pyodbc.connect('DRIVER={SQL Server};SERVER=****;DATABASE=REMATES;Trusted_Connection=yes')
-
-# Crear el cursor
-cursor = conexion.cursor()
-
-# Insertar los datos del DataFrame en la tabla
-for indice, fila in datos.iterrows():
-    cursor.execute(f"INSERT INTO [REMATES].[dbo].[NARVAEZ_VID_CRUDO] (TIEMPO, PRECIO, desc1, desc2, año, dom, ubicacion, provincia) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                   fila['Fecha'], fila['Precio'], fila['Desc1'], fila['Desc2'], fila['Año'], fila['Dom'], fila['Ubicacion'], fila['Provincia'])
-
-conexion.commit()   
-
-
-# Ejecutamos el proceso almacenado que ya creamos en SQL (Store Procedure)
-cursor.execute('exec [REMATES].[dbo].PA_LIMPIA_NARVAEZ_BID')
-
-conexion.commit()
-# Cerrar la conexión
-conexion.close()
-
-
-
-
-
