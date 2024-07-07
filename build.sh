@@ -2,6 +2,8 @@
 #!/bin/bash
 set -e
 
+# Otorgar permisos de ejecución al propio script
+chmod +x build.sh
 # Leer e instalar los paquetes del archivo apt-packages
 if [ -f "apt-packages" ]; then
   apt-get update
